@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>mod_google_maps</name>
+	<author>Bruno Batista</author>
+	<creationDate>27/05/2012</creationDate>
+	<copyright>Copyright (C) 2012 AtomTech, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>bruno@atomtech.com.br</authorEmail>
+	<authorUrl>http://www.atomtech.com.br</authorUrl>
+	<version>2.5.0</version>
+	<description>MOD_GOOGLE_MAPS_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_google_maps">mod_google_maps.php</filename>
+		<folder>elements</folder>
+		<folder>tmpl</folder>
+		<filename>mod_google_maps.xml</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="pt-BR">pt-BR.mod_google_maps.ini</language>
+		<language tag="pt-BR">pt-BR.mod_google_maps.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/modules/mod_google_maps/elements">
+				<field name="introtext" type="textarea" cols="40" rows="3" label="MOD_GOOGLE_MAPS_FIELD_INTRO_LABEL" description="MOD_GOOGLE_MAPS_FIELD_INTRO_DESC" />
+				<field name="width" type="text" default="425" size="3" maxlength="3" label="MOD_GOOGLE_MAPS_FIELD_WIDTH" description="MOD_GOOGLE_MAPS_FIELD_WIDTH_DESC" />
+				<field name="height" type="text" default="350" size="3" maxlength="3" label="MOD_GOOGLE_MAPS_FIELD_HEIGHT" description="MOD_GOOGLE_MAPS_FIELD_HEIGHT_DESC" />
+				<field name="mapName" type="text" default="map" label="MOD_GOOGLE_MAPS_FIELD_TAG_ID_LABEL" description="MOD_GOOGLE_MAPS_FIELD_TAG_ID_DESC" />
+				<field name="mapType" type="gmaptype" label="MOD_GOOGLE_MAPS_FIELD_MAP_TYPE" description="MOD_GOOGLE_MAPS_FIELD_MAP_TYPE_DESC" />
+				<field name="smallmap" type="radio" default="1" label="MOD_GOOGLE_MAPS_FIELD_NAVIGATION" description="MOD_GOOGLE_MAPS_FIELD_NAVIGATION_DESC">
+					<option value="0">JDISABLED</option>
+					<option value="1">JENABLED</option>
+				</field>
+				<field name="navControls" type="checkbox" value="1" label="MOD_GOOGLE_MAPS_FIELD_CONTROLS"  description="MOD_GOOGLE_MAPS_FIELD_CONTROLS_DESC" />
+				<field name="static" default="0" type="radio" label="MOD_GOOGLE_MAPS_FIELD_STATIC_LABEL" description="MOD_GOOGLE_MAPS_FIELD_STATIC_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="lat" type="text" default="-14.235004" label="MOD_GOOGLE_MAPS_FIELD_LATITUDE" description="MOD_GOOGLE_MAPS_FIELD_MARKER_LATITUDE_DESC" />
+				<field name="lng" type="text" default="-51.925279" label="MOD_GOOGLE_MAPS_FIELD_LONGITUDE" description="MOD_GOOGLE_MAPS_FIELD_MARKER_LONGITUDE_DESC" />
+				<field name="zoom" type="text" default="3" label="MOD_GOOGLE_MAPS_FIELD_ZOOM_LEVEL" description="MOD_GOOGLE_MAPS_FIELD_ZOOM_LEVEL_DESC" />
+				<field name="GMap" type="gmap" label="MOD_GOOGLE_MAPS_FIELD_DEFAULT_LOCATION" description="MOD_GOOGLE_MAPS_FIELD_DEFAULT_LOCATION_DESC" />
+				<field name="marker" type="gmarker" default="1" label="MOD_GOOGLE_MAPS_FIELD_MARKER" description="MOD_GOOGLE_MAPS_FIELD_MARKER_DESC" />
+				<field name="marker_lat" type="hidden" label="MOD_GOOGLE_MAPS_FIELD_MARKER_LATITUDE" description="MOD_GOOGLE_MAPS_FIELD_MARKER_LATITUDE_DESC" />
+				<field name="marker_lng" type="hidden" label="MOD_GOOGLE_MAPS_FIELD_MARKER_LONGITUDE" description="MOD_GOOGLE_MAPS_FIELD_MARKER_LONGITUDE_DESC" />
+				<field name="marker_title" type="text" default=""  size="45" label="MOD_GOOGLE_MAPS_FIELD_MARKER_TITLE" description="MOD_GOOGLE_MAPS_FIELD_MARKER_TITLE_DESC" />
+				<field name="marker_icon" type="text" label="MOD_GOOGLE_MAPS_FIELD_MARKER_ICON" description="MOD_GOOGLE_MAPS_FIELD_MARKER_ICON_DESC" default="media/mod_google_maps/images/pin.png"  size="45" />
+				<field name="marker_shadow" type="text" label="MOD_GOOGLE_MAPS_FIELD_MARKER_SHADOW" description="MOD_GOOGLE_MAPS_FIELD_MARKER_SHADOW_DESC" default="media/mod_google_maps/images/shadow.png"  size="45" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="cache" type="list" default="1" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field name="cachemode" type="hidden" default="static">
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
