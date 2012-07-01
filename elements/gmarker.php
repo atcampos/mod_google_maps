@@ -1,16 +1,23 @@
 <?php
 /**
- * @package		Google Maps
- * @subpackage	mod_google_maps
- * @copyright	Copyright (C) AtomTech, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @copyright   Copyright (C) 2012 AtomTech, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
-require_once(JPATH_SITE . '/modules/mod_google_maps/elements/GElement.php');
+require_once JPATH_SITE . '/modules/mod_google_maps/elements/GElement.php';
 
+/**
+ * Element GMarker class.
+ * 
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @since       2.5
+ */
 class JElementGMarker extends JElement{
 	var $_name = "GMarker";
 }
@@ -18,9 +25,9 @@ class JElementGMarker extends JElement{
 /**
  * Form Field GMarker class.
  *
- * @package		Google Maps
- * @subpackage	mod_google_maps
- * @since		2.5
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @since       2.5
  */
 class JFormFieldGMarker extends JFormField
 {
@@ -34,12 +41,19 @@ class JFormFieldGMarker extends JFormField
 	/**
 	 * Javascript map initialization
 	 * Javascript variable 'marker' must be defined.
+	 * 
+	 * @param   array  &$params  The custom params.
+	 * 
+	 * @return  void
+	 * 
+	 * @since   2.5
 	 */
-	function addJavascript(&$params){
+	public function addJavascript(&$params)
+	{
 		$doc = JFactory::getDocument();
 		$lat = $params->get('lat');
 		$long = $params->get('longitude');
-		$js =<<<EOL
+		$js = <<<EOL
 			var marker;
 			function updateMarker(element){
 				var lat = $('jform_params_lat').value;
@@ -79,19 +93,20 @@ EOL;
 	/**
 	 * Method to get the field input.
 	 *
-	 * @return	string		The field input.
-	 * @since	2.5
+	 * @return  string  The field input.
+	 * 
+	 * @since   2.5
 	 */
 	protected function getInput()
 	{
 		$params =& GElement::getParameters();
 
 		$this->addJavascript($params);
-		$marker = ($params->get('marker', '')) ? 'checked' : '' ;
-		
+		$marker = ($params->get('marker', '')) ? 'checked' : '';
+
 		$html = '<div>';
 		$html .= '<input type="checkbox" id="paramsmarker" name="jform[params][marker]" ' . $marker . ' onclick="updateMarker(this);" value="1" />';
 
 		return $html;
 	}
- }
+}

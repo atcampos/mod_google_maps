@@ -1,22 +1,22 @@
 <?php
 /**
- * @package		Google Maps
- * @subpackage	mod_google_maps
- * @copyright	Copyright (C) AtomTech, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @copyright   Copyright (C) 2012 AtomTech, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
-require_once(JPATH_SITE . '/modules/mod_google_maps/elements/GElement.php');
+require_once JPATH_SITE . '/modules/mod_google_maps/elements/GElement.php';
 
 /**
  * Form Field Gmap class.
  *
- * @package		Google Maps
- * @subpackage	mod_google_maps
- * @since		2.5
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @since       2.5
  */
 class JFormFieldGMap extends JFormField{
 
@@ -29,23 +29,34 @@ class JFormFieldGMap extends JFormField{
 
 	/**
 	 * Javascript map initialization
+	 * 
+	 * @param   float   $lat      The latitude.
+	 * @param   float   $lng      The Longitude.
+	 * @param   int     $zoom     The zoom level.
+	 * @param   string  $marker   The marker name.
+	 * @param   array   &$params  The custom params.
+	 * 
+	 * @return  void
+	 * 
+	 * @since   2.5
 	 */
-	function initMap( $lat, $lng, $zoom, $marker, &$params)
+	public function initMap($lat, $lng, $zoom, $marker, &$params)
 	{
 		$doc = &JFactory::getDocument();
 		$doc->addScript('http://maps.google.com/maps/api/js?sensor=false');
-		
+
 		// Get params
-		$mapType = $params->get('mapType', 'ROADMAP');	
+		$mapType = $params->get('mapType', 'ROADMAP');
 		$marker_lat = $params->get('marker_lat');
 		$marker_lng = $params->get('marker_lng');
 
-		if($marker){
+		if ($marker)
+		{
 			$markerTitle = $params->get('marker_title');
 			$markerIcon = $params->get('marker_icon');
 			$markerShadow = $params->get('marker_shadow');
-			
-			$markerScript =<<<EOL
+
+			$markerScript = <<<EOL
 			var opts = { draggable : true, bouncy: true };
 			opts.title = "{$markerTitle}";
 			opts.icon = "../{$markerIcon}";
@@ -61,7 +72,7 @@ class JFormFieldGMap extends JFormField{
 EOL;
 		}
 
-		$onload =<<<EOL
+		$onload = <<<EOL
 			var map;
 			var marker;
 
@@ -154,7 +165,8 @@ EOL;
 	/**
 	 * Method to get the field input.
 	 *
-	 * @return	string		The field input.
+	 * @return	string  The field input.
+	 * 
 	 * @since	2.5
 	 */
 	protected function getInput()
@@ -172,14 +184,14 @@ EOL;
 		$markerTitle = $params->get('marker_info', '');
 		$markerIcon = $params->get('marker_info', '');
 		$markerShadow = $params->get('marker_info', '');
-		
+
 		// Initialise map
 		$this->initMap($lat, $long, $zoom, $marker, $params);
-		
+
 		$search = JText::_("JSEARCH_FILTER_SUBMIT");
 		$searchMap = JText::_('MOD_GOOGLE_MAPS_FIELD_SEARCH_LOCATION');
-		
-		$elements =<<<EOL
+
+		$elements = <<<EOL
 		<div style="clear:left;">
 			<div id="map" style="padding: 10px,margin:4px 4px 10px; width: {$width}px; height: {$height}px"> </div>
 			<label for="search_location" >$searchMap</label>
@@ -191,7 +203,7 @@ EOL;
 		return $elements;
 	}
 
- }
+}
 ?>
 <script type="text/javascript">
 	/**

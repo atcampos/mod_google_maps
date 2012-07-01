@@ -1,12 +1,12 @@
 <?php
 /**
- * @package		Google Maps
- * @subpackage	mod_google_maps
- * @copyright	Copyright (C) AtomTech, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Google_Maps
+ * @subpackage  mod_google_maps
+ * @copyright   Copyright (C) 2012 AtomTech, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
 $doc = &JFactory::getDocument();
@@ -23,17 +23,23 @@ $doc->addScript($js);
 $mapOptions = '';
 $markerOptions = '';
 
-if($params->get('marker')){
+if ($params->get('marker'))
+{
 	$title = $params->get('marker_title', '');
-	if($marker_icon = $params->get('marker_icon') != ''){
+
+	if ($marker_icon = $params->get('marker_icon') != '')
+	{
 		$marker_icon = $params->get('marker_icon');
 	}
-	if($marker_shadow = $params->get('marker_shadow') != ''){
+
+	if ($marker_shadow = $params->get('marker_shadow') != '')
+	{
 		$marker_shadow = $params->get('marker_shadow');
 	}
+
 	$marker_lat = $params->get('marker_lat');
 	$marker_lng = $params->get('marker_lng');
-	$markerOptions =<<<EOL
+	$markerOptions = <<<EOL
 
 	var opts = new Object;
 	opts.title = "{$title}";
@@ -45,28 +51,33 @@ if($params->get('marker')){
 EOL;
 }
 $navControls = true;
-if($params->get('static') || $params->get('navControls', false) == 0){
-	$mapOptions .= ',disableDefaultUI: false'. PHP_EOL;
+if ($params->get('static') || $params->get('navControls', false) == 0)
+{
+	$mapOptions .= ',disableDefaultUI: false' . PHP_EOL;
 	$mapOptions .= ',streetViewControl: false' . PHP_EOL;
 	$navControls = false;
 }
-if($params->get('smallmap')){
-	$mapOptions .=  ', navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL} ' . PHP_EOL;
+if ($params->get('smallmap'))
+{
+	$mapOptions .= ', navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL} ' . PHP_EOL;
 	$navControls = true;
 }
 
-if(!$navControls)
+if (!$navControls)
+{
 	$mapOptions .= ',navigationControl: false' . PHP_EOL;
-
-
-if($params->get('static')){
-	$mapOptions .= 	', draggable: false' .PHP_EOL;
 }
+
+if ($params->get('static'))
+{
+	$mapOptions .= ', draggable: false' . PHP_EOL;
+}
+
 $mapTypeControl = $params->get('mapTypeControl',false) ? 'true' : 'false';
 
-$mapOptions .= ",mapTypeControl: {$mapTypeControl}". PHP_EOL;
+$mapOptions .= ",mapTypeControl: {$mapTypeControl}" . PHP_EOL;
 
-$script =<<<EOL
+$script = <<<EOL
 	google.maps.event.addDomListener(window, 'load', {$mapName}load);
 
     function {$mapName}load() {
@@ -87,10 +98,10 @@ JHTML::_('behavior.mootools');
 
 $doc->addScriptDeclaration($script);
 ?>
-<div class="map<?php echo $moduleclass_sfx ?>">
-	<?php if ($introtext) : ?>
-		<p><?php echo $introtext ?></p>
+<div class="map<?php echo $moduleclass_sfx; ?>">
+	<?php if ($introtext): ?>
+		<p><?php echo $introtext; ?></p>
 	<?php endif ?>
-	<div id="<?php echo $mapName ?>" style="width: <?php echo $width; ?>px; height: <?php echo $height; ?>px"></div>
+	<div id="<?php echo $mapName; ?>" style="width: <?php echo $width; ?>px; height: <?php echo $height; ?>px"></div>
 	
 </div>
